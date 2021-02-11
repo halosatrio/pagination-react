@@ -1,15 +1,33 @@
-const Posts = ({ posts, loading }) => {
+const Posts = ({ posts, loading, onSort, sortType }) => {
   if (loading) {
     return <h2>Loading...</h2>;
   }
   return (
-    <ul className="list-group mb-4">
-      {posts.map((post) => (
-        <li key={post.id} className="list-group-item">
-          {post.title}
-        </li>
-      ))}
-    </ul>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>UserId</th>
+          <th>
+            Post Title
+            <button onClick={onSort}>
+              <i
+                className={`fas fa-${
+                  sortType === "asc" ? "sort-up" : "sort-down"
+                }`}
+              />
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {posts.map((post) => (
+          <tr key={post.id}>
+            <td>{post.userId}</td>
+            <td>{post.title}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
